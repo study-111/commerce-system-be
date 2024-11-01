@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: commerce-system-api
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
