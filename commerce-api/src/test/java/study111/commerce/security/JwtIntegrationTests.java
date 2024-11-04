@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import study111.commerce.config.TokenResponsePayload;
+import study111.commerce.security.jwt.TokenResponsePayload;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

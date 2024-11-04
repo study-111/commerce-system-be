@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import study111.commerce.domain.User;
 import study111.commerce.repository.UserRepository;
 
 @RequiredArgsConstructor
@@ -22,7 +21,9 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Long save(User user) {
-        return userRepository.save(user);
+    public Long join(UserJoinCommand command) {
+        var entity = command.toEntity();
+
+        return userRepository.save(entity);
     }
 }

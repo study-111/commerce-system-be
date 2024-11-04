@@ -16,3 +16,5 @@ spring:
     password: pass
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
+jwt:
+  key: 01234567890123456789012345678910

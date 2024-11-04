@@ -1,4 +1,4 @@
-package study111.commerce.config;
+package study111.commerce.security.jwt;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
