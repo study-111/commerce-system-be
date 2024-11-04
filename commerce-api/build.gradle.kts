@@ -24,6 +24,7 @@ repositories {
 
 ext {
     set("mybatisVersion", "2.3.2")
+    set("jjwtVersion", "0.12.6")
 }
 
 dependencies {
@@ -40,6 +41,11 @@ dependencies {
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${property("mybatisVersion")}")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // jwt
+    implementation("io.jsonwebtoken:jjwt-api:${property("jjwtVersion")}")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:${property("jjwtVersion")}")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:${property("jjwtVersion")}")
 }
 
 tasks.withType<Test> {

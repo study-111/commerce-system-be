@@ -1,5 +1,18 @@
 spring:
   application:
     name: commerce-system-api
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/commerce
+    username: user
+    password: pass
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
