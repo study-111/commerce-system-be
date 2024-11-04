@@ -24,6 +24,6 @@ public class UserService implements UserDetailsService {
     public Long join(UserJoinCommand command) {
         var entity = command.toEntity();
 
-        return userRepository.save(entity);
+        return userRepository.save(entity).getId();
     }
 }

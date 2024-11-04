@@ -7,12 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import study111.commerce.security.jwt.TokenResponsePayload;
+import study111.commerce.dto.ResponsePayload;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class JwtIntegrationTests {
+class JwtAuthenticationIntegrationTests {
 
     @LocalServerPort
     int port;
@@ -23,7 +23,11 @@ class JwtIntegrationTests {
     @DisplayName("토큰을 발급받는다")
     @Test
     void getToken() {
-        var responseEntity = restTemplate.postForEntity("http://localhost:" + port + "/auth/token?username=" + "user&password=" + "pass", null, TokenResponsePayload.class);
+        var responseEntity = restTemplate.postForEntity("http://localhost:{port}/auth/token?username={user}&password={pass}",
+            null,
+            ResponsePayload.class,
+            port, "user", "pass"
+        );
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isNotNull();

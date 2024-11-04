@@ -1,5 +1,6 @@
 package study111.commerce.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@EqualsAndHashCode(of = {"id"})
 @Getter
 @Entity
 @Table(name = "users")
@@ -33,13 +35,14 @@ public class User implements UserDetails {
     protected User() {
     }
 
-    protected User(String username, String password) {
+    protected User(Long id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
 
     public static User of(String username, String password) {
-        return new User(username, password);
+        return new User(null, username, password);
     }
 
     @Override

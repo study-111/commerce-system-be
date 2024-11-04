@@ -14,7 +14,7 @@ public class AppConfiguration {
     ApplicationRunner run(UserService userService, PasswordEncoder passwordEncoder) {
         UserJoinCommand command = new UserJoinCommand();
         command.setUsername("user");
-        command.setPassword("pass");
+        command.setPassword(passwordEncoder.encode("pass"));
 
         return args -> {
             userService.join(command);

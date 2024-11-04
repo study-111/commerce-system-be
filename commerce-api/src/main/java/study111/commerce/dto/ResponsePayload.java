@@ -7,7 +7,10 @@ public class ResponsePayload<TData> {
 
     private TData data;
 
-    private ResponsePayload(TData data) {
+    public ResponsePayload() {
+    }
+
+    public ResponsePayload(TData data) {
         this.data = data;
     }
 
