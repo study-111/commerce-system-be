@@ -13,7 +13,7 @@
 ## 서비스 요구 사항
 
 - [ ] 회원 기능
-    - [ ] 가입
+    - [x] 가입
     - [x] 로그인
     - [ ] 정보 수정
     - [ ] 탈퇴
@@ -40,7 +40,6 @@ classDiagram
         - address: String
         + register()
         + login()
-        + logout()
         + updateInfo()
         + deleteAccount()
     }

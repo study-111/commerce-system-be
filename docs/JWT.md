@@ -106,3 +106,35 @@ org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a
 org.springframework.security.web.session.SessionManagementFilter@425b5fe2,
 org.springframework.security.web.access.ExceptionTranslationFilter@48b2dbc4, => BadCredentialsException
 org.springframework.security.web.access.intercept.AuthorizationFilter@38ef1a0a
+
+```json
+{
+  "data": [
+    {
+      "codes": [
+        "NotBlank.userJoinCommand.password",
+        "NotBlank.password",
+        "NotBlank.java.lang.String",
+        "NotBlank"
+      ],
+      "arguments": [
+        {
+          "codes": [
+            "userJoinCommand.password",
+            "password"
+          ],
+          "arguments": null,
+          "defaultMessage": "password",
+          "code": "password"
+        }
+      ],
+      "defaultMessage": "must not be blank",
+      "objectName": "userJoinCommand",
+      "field": "password",
+      "rejectedValue": "",
+      "bindingFailure": false,
+      "code": "NotBlank"
+    }
+  ]
+}
+```

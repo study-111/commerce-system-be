@@ -12,6 +12,7 @@ import static org.mockito.Mockito.when;
 class UserServiceTests {
 
     UserService userService;
+   
     UserRepository userRepository = mock(UserRepository.class);
 
     @BeforeEach

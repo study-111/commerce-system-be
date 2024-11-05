@@ -18,3 +18,8 @@ mybatis:
   mapper-locations: classpath:/mapper/*.xml
 jwt:
   key: 01234567890123456789012345678910
+logging:
+  level:
+    org.springframework.security: trace
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
