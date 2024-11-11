@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import study111.commerce.dto.ResponsePayload;
+import study111.commerce.response.CommonResponse;
 
 @RestControllerAdvice
 public class GlobalControllerAdvice {
@@ -16,7 +16,6 @@ public class GlobalControllerAdvice {
         var errors = exception.getAllErrors();
 
         return ResponseEntity.badRequest()
-            .body(ResponsePayload.of(errors));
+            .body(CommonResponse.of(errors));
     }
 }
-

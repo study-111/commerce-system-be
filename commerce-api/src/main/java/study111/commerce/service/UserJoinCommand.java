@@ -5,6 +5,7 @@ import lombok.Setter;
 import study111.commerce.domain.User;
 
 import javax.validation.constraints.NotBlank;
+import java.util.function.Function;
 
 @Setter
 @Getter
@@ -15,7 +16,7 @@ public class UserJoinCommand {
     @NotBlank
     private String password;
 
-    public User toEntity() {
-        return User.of(username, password);
+    public User toEntity(Function<String, String> passwordEncoder) {
+        return User.of(username, passwordEncoder.apply(password));
     }
 }

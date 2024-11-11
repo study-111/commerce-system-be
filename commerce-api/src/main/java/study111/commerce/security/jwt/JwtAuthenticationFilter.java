@@ -3,7 +3,6 @@ package study111.commerce.security.jwt;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -40,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 var message = e.getMessage();
                 log.error("message = {}", message);
 
-                throw new BadCredentialsException(message);
+//                throw new BadCredentialsException(message);
             }
         }
 

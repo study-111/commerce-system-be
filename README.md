@@ -50,14 +50,20 @@ classDiagram
         - description: String
         - price: BigDecimal
         - stock: Int
-        + getProduct()
-        + manageStock()
+        - category: ~Category~
+    }
+
+    class Category {
+        - id: ~Long~
+        - name: String
+        - parent: ~Category~
+        - children: List<~Category~>
     }
 
     class OrderStatus {
         <<enumeration>>
         - ORDERED
-        - PAYED
+        - PAID
         - CANCELED
     }
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study111.commerce.repository.UserRepository;
@@ -12,6 +13,7 @@ import study111.commerce.repository.UserRepository;
 @Service
 public class UserService implements UserDetailsService {
 
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Override
@@ -22,7 +24,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public Long join(UserJoinCommand command) {
-        var entity = command.toEntity();
+        var entity = command.toEntity(passwordEncoder::encode);
 
         return userRepository.save(entity).getId();
     }

@@ -2,8 +2,8 @@
 POST {{baseUrl}}/auth/token
 Content-Type: application/x-www-form-urlencoded
 
-username = user &
-password = pass
+username = tester &
+password = 1234
 
 > {%
     client.test('JWT 발급(username & password 인증)', () => {
@@ -35,15 +35,6 @@ Content-Type: application/json
         client.global.set("accessToken", response.body.data.accessToken)
     })
 %}
-
-### JWT 검증
-GET {{baseUrl}}/required-auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEifQ.vAQCgmoB0N2k2Rozjz9J2kB7X9hmFFZtnmK7Rkh-fWg
-
-{
-  "username": "admin",
-  "password": "pass"
-}
 
 ### JWT refresh
 GET {{baseUrl}}/auth/refresh

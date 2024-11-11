@@ -6,10 +6,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import study111.commerce.domain.User;
-import study111.commerce.dto.ResponsePayload;
+import study111.commerce.response.CommonResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
@@ -45,6 +46,7 @@ public class JwtConfigurer<H extends HttpSecurityBuilder<H>> extends AbstractHtt
 
         filter.setFilterProcessesUrl("/auth/token");
         filter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+        filter.setAuthenticationFailureHandler(authenticationFailureHandler());
 
         return filter;
     }
@@ -53,15 +55,24 @@ public class JwtConfigurer<H extends HttpSecurityBuilder<H>> extends AbstractHtt
         return (req, res, auth) -> {
             var user = (User) auth.getPrincipal();
 
-            var token = TokenResponsePayload.of(
-                jwtUtil.generateToken(user.getId()),
-                jwtUtil.generateToken(user.getId())
-            );
+            var token = TokenResponsePayload.builder()
+                .accessToken(jwtUtil.generateToken(user.getId()))
+                .refreshToken(jwtUtil.generateToken(user.getId()))
+                .build();
 
             res.setStatus(HttpServletResponse.SC_OK);
             res.setContentType(MediaType.APPLICATION_JSON_VALUE);
             res.setCharacterEncoding(StandardCharsets.UTF_8.name());
-            res.getWriter().print(objectMapper.writeValueAsString(ResponsePayload.of(token)));
+            res.getWriter().print(objectMapper.writeValueAsString(CommonResponse.of(token)));
+        };
+    }
+
+    private AuthenticationFailureHandler authenticationFailureHandler() {
+        return (req, res, e) -> {
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            res.setCharacterEncoding(StandardCharsets.UTF_8.name());
+            res.getWriter().print(objectMapper.writeValueAsString(CommonResponse.of("인증에 실패하였습니다")));
         };
     }
 }

@@ -1,0 +1,18 @@
+### 상품 조회 (200)
+GET {{baseUrl}}/products?page=1&size=10&sort=id,desc
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test('상품 조회 (200)', () => {
+        client.assert(response.status === 200, "Expected 403 Forbidden")
+    })
+%}
+
+### 상품 조회 (403)
+GET {{baseUrl}}/products?name=2&pageable.size=5&pageable.page=0
+
+> {%
+    client.test('상품 조회 (403)', () => {
+        client.assert(response.status === 403, "Expected 403 Forbidden")
+    })
+%}
