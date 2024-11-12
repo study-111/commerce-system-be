@@ -54,10 +54,11 @@ public class JwtConfigurer<H extends HttpSecurityBuilder<H>> extends AbstractHtt
     private AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (req, res, auth) -> {
             var user = (User) auth.getPrincipal();
+            var username = user.getUsername();
 
             var token = TokenResponsePayload.builder()
-                .accessToken(jwtUtil.generateToken(user.getId()))
-                .refreshToken(jwtUtil.generateToken(user.getId()))
+                .accessToken(jwtUtil.generateToken(user.getId(), username))
+                .refreshToken(jwtUtil.generateToken(user.getId(), username))
                 .build();
 
             res.setStatus(HttpServletResponse.SC_OK);

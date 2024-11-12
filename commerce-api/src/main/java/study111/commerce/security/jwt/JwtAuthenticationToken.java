@@ -3,28 +3,29 @@ package study111.commerce.security.jwt;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
-    private final Long userId;
+    private final UserDetails user;
 
-    public JwtAuthenticationToken(Long userId, Collection<? extends GrantedAuthority> authorities) {
+    public JwtAuthenticationToken(UserDetails user, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         super.setAuthenticated(true);
 
-        this.userId = userId;
+        this.user = user;
     }
 
-    public static JwtAuthenticationToken authenticated(Long userId, String role) {
-        return new JwtAuthenticationToken(userId, List.of(new SimpleGrantedAuthority("ROLE_" + role)));
+    public static JwtAuthenticationToken authenticated(UserDetails user, String role) {
+        return new JwtAuthenticationToken(user, List.of(new SimpleGrantedAuthority("ROLE_" + role)));
     }
 
     @Override
     public Object getPrincipal() {
-        return this.userId;
+        return this.user;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package study111.commerce.domain;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,20 +30,25 @@ public class User implements UserDetails {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "pass")
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "address")
+    private String address;
 
     protected User() {
     }
 
-    protected User(Long id, String username, String password) {
+    @Builder
+    protected User(Long id, String username, String password, String email, String address) {
         this.id = id;
         this.username = username;
         this.password = password;
-    }
-
-    public static User of(String username, String password) {
-        return new User(null, username, password);
+        this.email = email;
+        this.address = address;
     }
 
     @Override
@@ -68,5 +74,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserEditor.UserEditorBuilder toEditor() {
+        return UserEditor.builder()
+            .username(this.username)
+            .email(this.email)
+            .address(this.address);
+    }
+
+    public void edit(UserEditor editor) {
+        this.username = editor.getUsername();
+        this.email = editor.getEmail();
+        this.address = editor.getAddress();
     }
 }

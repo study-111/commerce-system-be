@@ -1,15 +1,16 @@
-package study111.commerce.service;
+package study111.commerce.request;
+
+import java.util.function.Function;
+
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
 import study111.commerce.domain.User;
 
-import javax.validation.constraints.NotBlank;
-import java.util.function.Function;
-
 @Setter
 @Getter
-public class UserJoinCommand {
+public class UserJoinRequest {
 
     @NotBlank
     private String username;
@@ -17,6 +18,6 @@ public class UserJoinCommand {
     private String password;
 
     public User toEntity(Function<String, String> passwordEncoder) {
-        return User.of(username, passwordEncoder.apply(password));
+        return User.builder().username(username).password(passwordEncoder.apply(password)).build();
     }
 }

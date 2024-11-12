@@ -22,9 +22,10 @@ public class JwtUtil {
         this.jwtParser = Jwts.parser().verifyWith(secretKey).build();
     }
 
-    public String generateToken(Long id) {
+    public String generateToken(Long id, String username) {
         return jwtBuilder
             .claims()
+            .subject(username)
             .add("id", String.valueOf(id))
             // TODO: need to add more claims(iat, exp, sub, etc.)
             .and()

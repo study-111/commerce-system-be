@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+import study111.commerce.domain.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -31,8 +32,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             try {
                 var id = jwtUtil.getClaim(accessToken, "id", String.class);
+                var username = jwtUtil.getClaim(accessToken, "sub", String.class);
 
-                var authentication = JwtAuthenticationToken.authenticated(Long.valueOf(id), "USER");
+                // ...
+                var authentication = JwtAuthenticationToken.authenticated(User.builder()
+                    .id((Long.valueOf(id)))
+                    .username(username)
+                    .build(), "USER");
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (SignatureException e) {

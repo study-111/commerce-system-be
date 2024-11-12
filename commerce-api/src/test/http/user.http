@@ -7,3 +7,14 @@ Content-Type: application/json
   "password": "1234"
 }
 
+### 수정
+POST {{baseUrl}}/users/102
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "username": "tester",
+  "password": "1234",
+  "email": "tmfrl043@naver.com",
+  "address": "2222.222-22"
+}

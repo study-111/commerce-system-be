@@ -15,7 +15,7 @@
 - [ ] 회원 기능
     - [x] 가입
     - [x] 로그인
-    - [ ] 정보 수정
+    - [x] 정보 수정
     - [ ] 탈퇴
 - [ ] 상품 기능
     - [ ] 조회
@@ -38,10 +38,6 @@ classDiagram
         - password: String
         - email: String
         - address: String
-        + register()
-        + login()
-        + updateInfo()
-        + deleteAccount()
     }
 
     class Product {
