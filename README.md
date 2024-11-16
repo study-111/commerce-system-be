@@ -18,11 +18,11 @@
     - [x] 정보 수정
     - [ ] 탈퇴
 - [ ] 상품 기능
-    - [ ] 조회
+    - [x] 조회
     - [ ] 재고 관리
 - [ ] 주문 기능
-    - [ ] 생성
-    - [ ] 조회
+    - [x] 생성
+    - [x] 조회
     - [ ] 취소
 - [ ] 결제 기능
     - [ ] 처리
@@ -69,9 +69,6 @@ classDiagram
         - product: ~Product~
         - quantity: Int
         - status: ~OrderStatus~
-        + createOrder()
-        + getOrder()
-        + cancelOrder()
     }
 
     class PaymentStatus {
@@ -94,8 +91,6 @@ classDiagram
         - amount: BigDecimal
         - status: ~PaymentStatus~
         - method: ~PaymentMethod~
-        + process()
-        + getPayment()
     }
 
     class Delivery {
@@ -103,7 +98,13 @@ classDiagram
         - order: ~Order~
         - address: String
         - status: ~DeliveryStatus~
-        + getDelivery()
-        + updateDelivery()
     }
+```
+
+## CLI
+
+```shell
+# 8080 포트 사용중인 프로세스 ID 확인
+$ lsof -i :8080 # Mac or Linux
+$ netstat -ano | findstr :8080 # Windows
 ```

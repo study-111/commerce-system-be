@@ -1,0 +1,22 @@
+### 주문
+POST {{baseUrl}}/orders
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "products": [
+    {
+      "id": 10,
+      "quantity": 2
+    },
+    {
+      "id": 11,
+      "quantity": 3
+    }
+  ]
+}
+
+
+### 주문 조회 +00:00
+GET {{baseUrl}}/orders?status=ORDERED&startDate=2024-11-12
+Authorization: Bearer {{accessToken}}

@@ -17,6 +17,7 @@ import study111.commerce.service.UserService;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -90,7 +91,7 @@ class UserControllerTests {
 
         // when
         var result = mockMvc.perform(
-            post("/users/{id}", 1L)
+            patch("/users/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content));
 
@@ -109,7 +110,7 @@ class UserControllerTests {
 
         // when
         var result = mockMvc.perform(
-            post("/users/{id}", 1L)
+            patch("/users/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content));
 
@@ -128,7 +129,7 @@ class UserControllerTests {
 
         // when
         var result = mockMvc.perform(
-            post("/users/{id}", 1L)
+            patch("/users/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content));
 

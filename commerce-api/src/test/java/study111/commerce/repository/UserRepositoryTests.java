@@ -1,15 +1,12 @@
 package study111.commerce.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import study111.commerce.domain.User;
 
-@DataJpaTest
-class UserRepositoryTests {
+import static org.assertj.core.api.Assertions.assertThat;
+
+class UserRepositoryTests extends AbstractDataJpaTest {
 
     @Autowired
     UserRepository userRepository;

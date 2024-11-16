@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import study111.commerce.request.GetProductsRequest;
+import study111.commerce.request.ProductsGetRequest;
 import study111.commerce.response.ProductsResponse;
 
 import java.math.BigDecimal;
@@ -17,11 +17,12 @@ import static study111.commerce.domain.QProduct.product;
 
 @RequiredArgsConstructor
 @Repository
-public class ProductQueryRepository {
+public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<ProductsResponse> findProducts(GetProductsRequest request, Pageable pageable) {
+    @Override
+    public List<ProductsResponse> findProducts(ProductsGetRequest request, Pageable pageable) {
         return queryFactory.select(constructor(ProductsResponse.class, product))
             .from(product)
             .join(product.category, category)

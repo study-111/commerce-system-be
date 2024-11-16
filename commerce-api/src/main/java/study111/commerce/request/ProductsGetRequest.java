@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Setter
 @Getter
-public class GetProductsRequest {
+public class ProductsGetRequest {
 
     private String name;
     private BigDecimal minPrice;

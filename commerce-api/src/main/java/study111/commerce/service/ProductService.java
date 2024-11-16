@@ -3,8 +3,8 @@ package study111.commerce.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import study111.commerce.repository.ProductQueryRepository;
-import study111.commerce.request.GetProductsRequest;
+import study111.commerce.repository.ProductRepository;
+import study111.commerce.request.ProductsGetRequest;
 import study111.commerce.response.ProductsResponse;
 
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private final ProductQueryRepository productQueryRepository;
+    private final ProductRepository productRepository;
 
-    public List<ProductsResponse> getProducts(GetProductsRequest request, Pageable pageable) {
-        return productQueryRepository.findProducts(request, pageable);
+    public List<ProductsResponse> getProducts(ProductsGetRequest request, Pageable pageable) {
+        return productRepository.findProducts(request, pageable);
     }
 }

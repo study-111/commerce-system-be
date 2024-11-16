@@ -1,7 +1,8 @@
 package study111.commerce.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,19 +13,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Entity
-@Table
+@Table(name = "orders")
 public class Order extends BaseEntity {
 
     @GeneratedValue
     @Id
-    @Column(name = "order_id")
+    @Column(name = "orders_id")
     private Long id;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -32,6 +33,13 @@ public class Order extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @Builder
+    protected Order(List<OrderProduct> orderProducts) {
+        orderProducts.forEach(this::addOrderProduct);
+
+        this.status = OrderStatus.ORDERED;
+    }
 
     public void addOrderProduct(OrderProduct orderProduct) {
         this.orderProducts.add(orderProduct);
@@ -41,7 +49,13 @@ public class Order extends BaseEntity {
 
     public int getTotalQuantity() {
         return orderProducts.stream()
-                .map(OrderProduct::getQuantity)
-                .reduce(0, Integer::sum);
+            .map(OrderProduct::getQuantity)
+            .reduce(0, Integer::sum);
+    }
+
+    public BigDecimal getTotalPrice() {
+        return orderProducts.stream()
+            .map(OrderProduct::getOrderPrice)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
