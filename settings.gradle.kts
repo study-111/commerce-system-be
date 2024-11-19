@@ -1,4 +1,4 @@
-rootProject.name = "commerce-system"
+rootProject.name = "practice-java"
 
 include("commerce-api")
 include("todo-api")
