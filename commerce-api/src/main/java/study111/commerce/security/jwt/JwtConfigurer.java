@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import study111.commerce.domain.User;
 import study111.commerce.response.CommonResponse;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 
 public class JwtConfigurer<H extends HttpSecurityBuilder<H>> extends AbstractHttpConfigurer<JwtConfigurer<H>, H> {

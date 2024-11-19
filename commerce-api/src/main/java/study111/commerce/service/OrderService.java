@@ -13,7 +13,7 @@ import study111.commerce.request.OrderGetResponse;
 import study111.commerce.request.OrdersGetRequest;
 import study111.commerce.response.OrdersGetResponse;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

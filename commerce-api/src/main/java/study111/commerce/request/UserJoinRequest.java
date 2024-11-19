@@ -2,7 +2,7 @@ package study111.commerce.request;
 
 import java.util.function.Function;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;

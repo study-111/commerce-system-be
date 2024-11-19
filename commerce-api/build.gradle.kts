@@ -1,7 +1,7 @@
 plugins {
     java
-    id("org.springframework.boot") version "2.7.18"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.springframework.boot") version "3.3.5"
+    id("io.spring.dependency-management") version "1.1.6"
 }
 
 group = "study-111"
@@ -24,7 +24,6 @@ repositories {
 }
 
 ext {
-    set("mybatisVersion", "2.3.2")
     set("jjwtVersion", "0.12.6")
 }
 
@@ -33,16 +32,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${property("mybatisVersion")}")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${property("mybatisVersion")}")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testCompileOnly("org.apache.httpcomponents:httpclient")
+    testCompileOnly("org.apache.httpcomponents.client5:httpclient5")
 
     // jwt
     implementation("io.jsonwebtoken:jjwt-api:${property("jjwtVersion")}")
@@ -50,28 +47,12 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:${property("jjwtVersion")}")
 
     // querydsl
-    implementation("com.querydsl:querydsl-jpa")
-    annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jpa")
+    implementation("com.querydsl:querydsl-jpa:${dependencyManagement.importedProperties["querydsl.version"]}:jakarta")
+    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties["querydsl.version"]}:jakarta")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api")
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-val generated = file("src/main/generated")
-
-tasks.withType<JavaCompile> {
-    options.generatedSourceOutputDirectory.set(generated)
-}
-
-sourceSets {
-    main {
-        java.srcDirs += generated
-    }
-}
-
-tasks.clean {
-    delete(generated)
 }

@@ -17,7 +17,7 @@ import study111.commerce.request.UserModifyRequest;
 import study111.commerce.response.CommonResponse;
 import study111.commerce.service.UserService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Slf4j
 @RequiredArgsConstructor

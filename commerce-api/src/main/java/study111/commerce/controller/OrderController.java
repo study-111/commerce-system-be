@@ -18,7 +18,7 @@ import study111.commerce.response.CommonResponse;
 import study111.commerce.response.OrdersGetResponse;
 import study111.commerce.service.OrderService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
